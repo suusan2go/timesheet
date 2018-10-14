@@ -1,22 +1,26 @@
 import * as React from 'react';
-import './App.css';
+import AppRoute from './components/AppRoute'
+import MainLayout from './pages/Layout/MainLayout';
+import ProjectsPage from './pages/Projects';
+import Top from './pages/Top';
 
-import logo from './logo.svg';
+import { createBrowserHistory } from 'history';
+import { Router, Switch } from 'react-router-dom';
+
+const history = createBrowserHistory()
 
 class App extends React.Component {
   public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
+      <Router history={history}>
+        <Switch>
+          <AppRoute exact={true} path="/" component={Top} layout={MainLayout} />
+          <AppRoute exact={true} path="/projects" component={ProjectsPage} layout={MainLayout} />
+        </Switch>
+      </Router>
     );
   }
 }
 
 export default App;
+
